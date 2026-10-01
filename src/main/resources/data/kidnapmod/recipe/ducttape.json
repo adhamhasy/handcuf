@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": ["minecraft:paper", "minecraft:slime_ball", "minecraft:string"],
+  "result": {
+    "id": "minecraft:gray_dye", "count": 1,
+    "components": {
+      "minecraft:item_name": {"text": "Duct Tape"},
+      "minecraft:custom_data": {"kidnapmod": "ducttape"}
+    }
+  }
+}

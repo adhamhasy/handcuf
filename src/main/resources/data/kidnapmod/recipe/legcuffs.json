@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": ["I I", "ILI", "I I"],
+  "key": { "I": "minecraft:iron_ingot", "L": "minecraft:lead" },
+  "result": {
+    "id": "minecraft:iron_bars", "count": 1,
+    "components": {
+      "minecraft:item_name": {"text": "Leg Cuffs"},
+      "minecraft:custom_data": {"kidnapmod": "legcuffs"}
+    }
+  }
+}

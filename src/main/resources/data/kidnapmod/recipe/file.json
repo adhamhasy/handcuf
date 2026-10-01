@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": ["minecraft:iron_ingot", "minecraft:flint"],
+  "result": {
+    "id": "minecraft:flint", "count": 1,
+    "components": {
+      "minecraft:item_name": {"text": "Filing Tool"},
+      "minecraft:custom_data": {"kidnapmod": "file"}
+    }
+  }
+}
