@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
-  "ingredients": ["minecraft:black_wool", "minecraft:black_wool", "minecraft:string"],
+  "ingredients": ["minecraft:carved_pumpkin", "minecraft:string", "minecraft:string"],
   "result": {
-    "id": "minecraft:black_wool", "count": 1,
+    "id": "minecraft:carved_pumpkin", "count": 1,
     "components": {
       "minecraft:item_name": {"text": "Head Cover"},
       "minecraft:custom_data": {"kidnapmod": "headcover"}

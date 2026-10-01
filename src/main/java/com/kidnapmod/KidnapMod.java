@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.entity.event.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
@@ -39,7 +39,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -59,9 +59,6 @@ public class KidnapMod implements ModInitializer {
 	static final int FILE_TICKS_HANDCUFFS = 20 * 45; // 45 s of continuous filing
 	static final int FILE_TICKS_LEGCUFFS = 20 * 30;  // 30 s
 	static final String MUFFLE = "mfmhmf";
-
-	static final String BODY_TAG = "kidnapmod_body";
-	static final String OWNER_PREFIX = "kidnapmod_owner_";
 
 	static final Identifier SLOW_ID = Identifier.fromNamespaceAndPath(MOD_ID, "leg_cuff_slow");
 	static final Identifier NOJUMP_ID = Identifier.fromNamespaceAndPath(MOD_ID, "leg_cuff_nojump");
@@ -83,9 +80,10 @@ public class KidnapMod implements ModInitializer {
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> spawnBody(server, handler.getPlayer()));
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			UUID id = handler.getPlayer().getUUID();
-			for (ServerLevel lvl : server.getAllLevels()) {
-				for (Entity e : lvl.getAllEntities()) {
-					if (id.equals(bodyOwner(e))) PENDING_DISCARD.add(e);
+			for (UUID bodyId : STORE.bodiesOf(id)) {
+				for (ServerLevel lvl : server.getAllLevels()) {
+					Entity e = lvl.getEntity(bodyId);
+					if (e != null) PENDING_DISCARD.add(e);
 				}
 			}
 		});
@@ -136,16 +134,7 @@ public class KidnapMod implements ModInitializer {
 	}
 
 	private static UUID bodyOwner(Entity e) {
-		if (e.getType() != EntityType.MANNEQUIN) return null;
-		for (String t : e.getTags()) {
-			if (t.startsWith(OWNER_PREFIX)) {
-				try {
-					return UUID.fromString(t.substring(OWNER_PREFIX.length()));
-				} catch (IllegalArgumentException ignored) {
-				}
-			}
-		}
-		return null;
+		return STORE.bodyOwner(e.getUUID());
 	}
 
 	private static UUID targetOf(Entity e) {
@@ -172,11 +161,14 @@ public class KidnapMod implements ModInitializer {
 
 	private static void give(ServerPlayer p, ItemStack stack) {
 		if (stack.isEmpty()) return;
-		if (!p.getInventory().add(stack)) p.drop(stack, false);
+		if (!p.getInventory().add(stack)) {
+			ServerLevel lvl = (ServerLevel) p.level();
+			lvl.addFreshEntity(new ItemEntity(lvl, p.getX(), p.getY() + 0.5, p.getZ(), stack));
+		}
 	}
 
 	private static void actionBar(ServerPlayer p, String msg) {
-		p.displayClientMessage(Component.literal(msg), true);
+		p.sendSystemMessage(Component.literal(msg), true);
 	}
 
 	private static void tell(ServerPlayer p, String msg) {
@@ -204,15 +196,20 @@ public class KidnapMod implements ModInitializer {
 		long lsb = id.getLeastSignificantBits();
 		String ints = (int) (msb >> 32) + "," + (int) msb + "," + (int) (lsb >> 32) + "," + (int) lsb;
 
-		String nbt = "{profile:{name:\"" + esc(name) + "\",id:[I;" + ints + "]}"
+		UUID bodyId = UUID.randomUUID();
+		long bm = bodyId.getMostSignificantBits();
+		long bl = bodyId.getLeastSignificantBits();
+		String bints = (int) (bm >> 32) + "," + (int) bm + "," + (int) (bl >> 32) + "," + (int) bl;
+
+		String nbt = "{UUID:[I;" + bints + "],profile:{name:\"" + esc(name) + "\",id:[I;" + ints + "]}"
 			+ ",CustomName:{text:\"" + esc(name) + "\"},CustomNameVisible:1b,hide_description:1b"
 			+ ",immovable:1b,Invulnerable:1b,Silent:1b"
-			+ ",Rotation:[" + p.getYRot() + "f,0f]"
-			+ ",Tags:[\"" + BODY_TAG + "\",\"" + OWNER_PREFIX + id + "\"]}";
+			+ ",Rotation:[" + p.getYRot() + "f,0f]}";
 		String cmd = String.format(Locale.ROOT, "summon minecraft:mannequin %.4f %.4f %.4f %s",
 			p.getX(), p.getY(), p.getZ(), nbt);
 
 		SPAWNING.add(id);
+		STORE.addBody(bodyId, id);
 		try {
 			CommandSourceStack src = server.createCommandSourceStack()
 				.withLevel((ServerLevel) p.level())
@@ -233,7 +230,10 @@ public class KidnapMod implements ModInitializer {
 		if (!PENDING_DISCARD.isEmpty()) {
 			List<Entity> copy = new ArrayList<>(PENDING_DISCARD);
 			PENDING_DISCARD.clear();
-			for (Entity e : copy) e.discard();
+			for (Entity e : copy) {
+				e.discard();
+				STORE.removeBody(e.getUUID());
+			}
 		}
 		for (ServerPlayer p : server.getPlayerList().getPlayers()) tickPlayer(p);
 	}
@@ -323,7 +323,7 @@ public class KidnapMod implements ModInitializer {
 		if (targetId == null) return kind.isEmpty() ? InteractionResult.PASS : InteractionResult.FAIL;
 		if (targetId.equals(actor.getUUID())) return kind.isEmpty() ? InteractionResult.PASS : InteractionResult.FAIL;
 
-		boolean offline = entity.getType() == EntityType.MANNEQUIN;
+		boolean offline = bodyOwner(entity) != null;
 		String name = entity.getName().getString();
 		State ts = STORE.get(targetId);
 		boolean targetCuffed = ts != null && ts.handKey != null;

@@ -34,8 +34,8 @@ public final class KidnapItems {
 		return switch (kind) {
 			case HANDCUFFS -> base(Items.LEAD, kind, "Handcuffs");
 			case LEGCUFFS -> base(Items.IRON_BARS, kind, "Leg Cuffs");
-			case DUCT_TAPE -> base(Items.GRAY_DYE, kind, "Duct Tape");
-			case HEAD_COVER -> base(Items.BLACK_WOOL, kind, "Head Cover");
+			case DUCT_TAPE -> base(Items.PAPER, kind, "Duct Tape");
+			case HEAD_COVER -> base(Items.CARVED_PUMPKIN, kind, "Head Cover");
 			case FILE -> base(Items.FLINT, kind, "Filing Tool");
 			default -> ItemStack.EMPTY;
 		};
