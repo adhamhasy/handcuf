@@ -3,25 +3,27 @@
   "category": "equipment",
   "ingredients": [
     "minecraft:iron_ingot",
-    "minecraft:flint"
+    "minecraft:iron_ingot",
+    "minecraft:iron_nugget",
+    "minecraft:string"
   ],
   "result": {
-    "id": "minecraft:flint",
+    "id": "minecraft:netherite_scrap",
     "count": 1,
     "components": {
       "minecraft:custom_name": {
-        "text": "Filing Tool",
+        "text": "Shackle Chain",
         "italic": false
       },
       "minecraft:custom_data": {
-        "kidnapmod": "file"
+        "kidnapmod": "shackle"
       },
       "minecraft:custom_model_data": {
         "floats": [
-          1005.0
+          1015.0
         ],
         "strings": [
-          "file"
+          "shackle"
         ]
       }
     }

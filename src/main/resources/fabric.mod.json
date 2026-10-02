@@ -4,16 +4,29 @@
   "version": "${version}",
   "name": "Kidnap Mod",
   "description": "Kidnap offline players: handcuffs, leg cuffs, duct tape, head covers, keys and files.",
-  "authors": ["you"],
+  "authors": [
+    "you"
+  ],
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
-    "main": ["com.kidnapmod.KidnapMod"]
+    "main": [
+      "com.kidnapmod.KidnapMod"
+    ],
+    "client": [
+      "com.kidnapmod.client.KidnapClient"
+    ],
+    "modmenu": [
+      "com.kidnapmod.client.KidnapModMenu"
+    ]
   },
   "depends": {
     "fabricloader": ">=0.19.5",
     "minecraft": "~26.3",
     "java": ">=25",
     "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
   }
 }

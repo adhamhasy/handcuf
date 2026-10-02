@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "I I",
+    "ILI",
+    "I I"
+  ],
+  "key": {
+    "I": "minecraft:netherite_ingot",
+    "L": "minecraft:lead"
+  },
+  "result": {
+    "id": "minecraft:iron_ingot",
+    "count": 1,
+    "components": {
+      "minecraft:custom_name": {
+        "text": "Netherite Leg Cuffs",
+        "italic": false
+      },
+      "minecraft:custom_data": {
+        "kidnapmod": "legcuffs",
+        "tier": "netherite"
+      },
+      "minecraft:custom_model_data": {
+        "floats": [
+          1302.0
+        ],
+        "strings": [
+          "legcuffs_netherite"
+        ]
+      }
+    }
+  }
+}

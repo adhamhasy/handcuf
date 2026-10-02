@@ -2,26 +2,27 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    "minecraft:iron_ingot",
-    "minecraft:flint"
+    "minecraft:arrow",
+    "minecraft:fermented_spider_eye",
+    "minecraft:string"
   ],
   "result": {
-    "id": "minecraft:flint",
-    "count": 1,
+    "id": "minecraft:arrow",
+    "count": 2,
     "components": {
       "minecraft:custom_name": {
-        "text": "Filing Tool",
+        "text": "Sleeping Dart",
         "italic": false
       },
       "minecraft:custom_data": {
-        "kidnapmod": "file"
+        "kidnapmod": "dart"
       },
       "minecraft:custom_model_data": {
         "floats": [
-          1005.0
+          1009.0
         ],
         "strings": [
-          "file"
+          "dart"
         ]
       }
     }

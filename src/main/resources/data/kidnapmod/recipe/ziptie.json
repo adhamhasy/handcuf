@@ -2,26 +2,27 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    "minecraft:iron_ingot",
-    "minecraft:flint"
+    "minecraft:string",
+    "minecraft:string",
+    "minecraft:iron_nugget"
   ],
   "result": {
-    "id": "minecraft:flint",
-    "count": 1,
+    "id": "minecraft:slime_ball",
+    "count": 4,
     "components": {
       "minecraft:custom_name": {
-        "text": "Filing Tool",
+        "text": "Zip Tie",
         "italic": false
       },
       "minecraft:custom_data": {
-        "kidnapmod": "file"
+        "kidnapmod": "ziptie"
       },
       "minecraft:custom_model_data": {
         "floats": [
-          1005.0
+          1010.0
         ],
         "strings": [
-          "file"
+          "ziptie"
         ]
       }
     }

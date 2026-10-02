@@ -4,11 +4,14 @@ plugins {
 }
 
 repositories {
+	maven("https://maven.terraformersmc.com/")
 }
 
 dependencies {
 	minecraft("com.mojang:minecraft:${providers.gradleProperty("minecraft_version").get()}")
 	implementation("net.fabricmc:fabric-loader:${providers.gradleProperty("loader_version").get()}")
+	// Mod Menu: only needed to COMPILE the settings button (not required at runtime)
+	compileOnly("com.terraformersmc:modmenu:${providers.gradleProperty("modmenu_version").get()}")
 	implementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
 }
 

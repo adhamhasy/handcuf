@@ -2,26 +2,27 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    "minecraft:iron_ingot",
-    "minecraft:flint"
+    "minecraft:paper",
+    "minecraft:slime_ball",
+    "minecraft:string"
   ],
   "result": {
-    "id": "minecraft:flint",
+    "id": "minecraft:paper",
     "count": 1,
     "components": {
       "minecraft:custom_name": {
-        "text": "Filing Tool",
+        "text": "Duct Tape",
         "italic": false
       },
       "minecraft:custom_data": {
-        "kidnapmod": "file"
+        "kidnapmod": "ducttape"
       },
       "minecraft:custom_model_data": {
         "floats": [
-          1005.0
+          1003.0
         ],
         "strings": [
-          "file"
+          "ducttape"
         ]
       }
     }

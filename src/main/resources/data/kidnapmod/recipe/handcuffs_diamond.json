@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "I I",
+    "ILI"
+  ],
+  "key": {
+    "I": "minecraft:diamond",
+    "L": "minecraft:lead"
+  },
+  "result": {
+    "id": "minecraft:lead",
+    "count": 1,
+    "components": {
+      "minecraft:custom_name": {
+        "text": "Diamond Handcuffs",
+        "italic": false
+      },
+      "minecraft:custom_data": {
+        "kidnapmod": "handcuffs",
+        "tier": "diamond"
+      },
+      "minecraft:custom_model_data": {
+        "floats": [
+          1201.0
+        ],
+        "strings": [
+          "handcuffs_diamond"
+        ]
+      }
+    }
+  }
+}

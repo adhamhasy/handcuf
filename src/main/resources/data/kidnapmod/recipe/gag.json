@@ -2,26 +2,27 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    "minecraft:iron_ingot",
-    "minecraft:flint"
+    "minecraft:paper",
+    "minecraft:string",
+    "minecraft:string"
   ],
   "result": {
-    "id": "minecraft:flint",
+    "id": "minecraft:bone",
     "count": 1,
     "components": {
       "minecraft:custom_name": {
-        "text": "Filing Tool",
+        "text": "Cloth Gag",
         "italic": false
       },
       "minecraft:custom_data": {
-        "kidnapmod": "file"
+        "kidnapmod": "gag"
       },
       "minecraft:custom_model_data": {
         "floats": [
-          1005.0
+          1011.0
         ],
         "strings": [
-          "file"
+          "gag"
         ]
       }
     }

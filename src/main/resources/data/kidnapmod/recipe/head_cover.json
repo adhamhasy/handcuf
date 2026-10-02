@@ -2,26 +2,27 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    "minecraft:iron_ingot",
-    "minecraft:flint"
+    "minecraft:leather",
+    "minecraft:leather",
+    "minecraft:string"
   ],
   "result": {
-    "id": "minecraft:flint",
+    "id": "minecraft:leather",
     "count": 1,
     "components": {
       "minecraft:custom_name": {
-        "text": "Filing Tool",
+        "text": "Head Cover",
         "italic": false
       },
       "minecraft:custom_data": {
-        "kidnapmod": "file"
+        "kidnapmod": "headcover"
       },
       "minecraft:custom_model_data": {
         "floats": [
-          1005.0
+          1004.0
         ],
         "strings": [
-          "file"
+          "headcover"
         ]
       }
     }

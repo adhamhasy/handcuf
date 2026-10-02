@@ -2,26 +2,26 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    "minecraft:iron_ingot",
-    "minecraft:flint"
+    "minecraft:lead",
+    "minecraft:string"
   ],
   "result": {
-    "id": "minecraft:flint",
+    "id": "minecraft:string",
     "count": 1,
     "components": {
       "minecraft:custom_name": {
-        "text": "Filing Tool",
+        "text": "Captive Leash",
         "italic": false
       },
       "minecraft:custom_data": {
-        "kidnapmod": "file"
+        "kidnapmod": "leash"
       },
       "minecraft:custom_model_data": {
         "floats": [
-          1005.0
+          1006.0
         ],
         "strings": [
-          "file"
+          "leash"
         ]
       }
     }
