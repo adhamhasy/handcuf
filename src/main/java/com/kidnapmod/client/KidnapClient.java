@@ -39,7 +39,6 @@ public class KidnapClient implements ClientModInitializer {
 	private static void registerTab() {
 		boolean allTiers = Settings.CLIENT.bool("tab_all_tiers");
 		boolean special = Settings.CLIENT.bool("tab_special");
-		boolean bulk = Settings.CLIENT.bool("tab_bulk");
 
 		ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB,
 			Identifier.fromNamespaceAndPath("kidnapmod", "tab"));
@@ -51,7 +50,7 @@ public class KidnapClient implements ClientModInitializer {
 					if (!allTiers && (name.endsWith("_gold") || name.endsWith("_diamond") || name.endsWith("_netherite"))) continue;
 					if (!special && SPECIAL.contains(name)) continue;
 					ItemStack st = KidnapItems.createByName(name);
-					if (!bulk) st.setCount(1);
+					st.setCount(1); // creative tab entries must be exactly 1 item
 					output.accept(st);
 				}
 			})

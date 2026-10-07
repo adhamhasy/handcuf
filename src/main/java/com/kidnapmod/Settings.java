@@ -146,7 +146,6 @@ public final class Settings {
 		b(C, "Creative tab", "tab_enabled", "Creative tab", true, "Show the Kidnap Mod creative tab. (Restart needed.)");
 		b(C, "Creative tab", "tab_all_tiers", "All cuff tiers", true, "Show gold / diamond / netherite cuffs in the tab. (Restart needed.)");
 		b(C, "Creative tab", "tab_special", "Special items", true, "Show zip ties, darts, shackle, lockpick, earmuffs. (Restart needed.)");
-		b(C, "Creative tab", "tab_bulk", "Bulk stacks", true, "Darts and zip ties come in stacks of 16. (Restart needed.)");
 	}
 
 	private Settings() {}
