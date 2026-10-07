@@ -19,6 +19,7 @@ import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
 
 /**
@@ -163,7 +164,7 @@ public final class KidnapItems {
 		else if (id.startsWith("worn_")) { base = "leather_helmet"; slot = EquipmentSlot.HEAD; }
 		else return ItemStack.EMPTY;
 		ItemStack s = build(base, id, "Restraint (worn)", 0, id);
-		ResourceKey<EquipmentAsset> asset = ResourceKey.create(Registries.EQUIPMENT_ASSET,
+		ResourceKey<EquipmentAsset> asset = ResourceKey.create(EquipmentAssets.ROOT_ID,
 			Identifier.fromNamespaceAndPath(KidnapMod.MOD_ID, id));
 		s.set(DataComponents.EQUIPPABLE, Equippable.builder(slot).setAsset(asset).build());
 		s.set(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);

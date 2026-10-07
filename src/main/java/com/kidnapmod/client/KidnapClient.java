@@ -7,7 +7,7 @@ import java.util.Set;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -43,7 +43,7 @@ public class KidnapClient implements ClientModInitializer {
 
 		ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB,
 			Identifier.fromNamespaceAndPath("kidnapmod", "tab"));
-		CreativeModeTab tab = FabricItemGroup.builder()
+		CreativeModeTab tab = FabricCreativeModeTab.builder()
 			.title(Component.literal("Kidnap Mod"))
 			.icon(() -> KidnapItems.create(KidnapItems.HANDCUFFS))
 			.displayItems((params, output) -> {

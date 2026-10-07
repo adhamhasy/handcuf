@@ -127,7 +127,7 @@ public class KidnapMod implements ModInitializer {
 		Settings.SERVER.save();      // writes the file with every default so ops can see all options
 		Settings.loadPrefs();
 
-		PayloadTypeRegistry.playS2C().register(SyncPayload.TYPE, SyncPayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(SyncPayload.TYPE, SyncPayload.CODEC);
 
 		STORE.onChange = id -> { if (SERVER != null) syncVisuals(SERVER, id); };
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> { SERVER = server; STORE.load(server); });
